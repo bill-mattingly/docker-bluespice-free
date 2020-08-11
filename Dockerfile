@@ -126,5 +126,5 @@ RUN chmod +x /etc/init.d/parsoid; \
 	sed -i 's/error_reporting =.*/error_reporting=E_ALL ^ E_NOTICE/g' /etc/php/7.2/cli/php.ini; \
 	echo "JAVA_OPTIONS=\"\-Xms512m -Xmx1024m -Djetty.home=127.0.0.1\"" >> /etc/default/jetty9; \
 	chown -Rf www-data:www-data /run/php
-EXPOSE 80 443
+EXPOSE 25 80 443
 ENTRYPOINT /opt/docker/init.sh
