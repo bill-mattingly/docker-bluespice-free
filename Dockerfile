@@ -60,6 +60,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 	imagemagick \
 	poppler-utils \
 	ghostscript \
+	postfix \
+	nano \
+	certbot \
+	python3-certbot-nginx \
  && mkdir -p /opt/docker/pkg \
  && cd /tmp \
  && wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.8.8.deb \
