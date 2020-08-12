@@ -41,6 +41,11 @@ if [ -f "/opt/docker/.firstrun" ]; then
             sed -i "s/http:/https:/g" /usr/local/parsoid/localsettings.js
             rm /etc/nginx/sites-enabled/bluespice.conf
             ln -s /etc/nginx/sites-available/bluespice-ssl.conf /etc/nginx/sites-enabled/
+        else
+            sed -i "s/http:/https:/g" /usr/local/parsoid/localsettings.js
+            rm /etc/nginx/sites-enabled/bluespice.conf
+            ln -s /etc/nginx/sites-available/bluespice-ssl.conf /etc/nginx/sites-enabled/
+            certbot
         fi
         echo "Installing BlueSpice..."
         /usr/bin/php /data/www/bluespice/w/maintenance/install.php --confpath="/data/www/bluespice/w" --dbname="bluespice" --dbuser="bluespice" --dbpass="$rndpass" --dbserver="localhost" --lang="$bs_lang" --pass="$bs_password" --scriptpath=/w --server="$bs_url" "BlueSpice" "$bs_user" > /dev/null 2>&1
@@ -104,7 +109,12 @@ if [ -f "/opt/docker/.firstrun" ]; then
             sed -i "s/{KEYFILE}/\/data\/cert\/ssl.key/g" /etc/nginx/sites-available/bluespice-ssl.conf
             sed -i "s/http:/https:/g" /usr/local/parsoid/localsettings.js
             rm /etc/nginx/sites-enabled/bluespice.conf
+            ln -s /etc/nginx/sites-available/bluespice-ssl.conf /etc/nginx/sites-enabled
+        else
+            sed -i "s/http:/https:/g" /usr/local/parsoid/localsettings.js
+            rm /etc/nginx/sites-enabled/bluespice.conf
             ln -s /etc/nginx/sites-available/bluespice-ssl.conf /etc/nginx/sites-enabled/
+            certbot
         fi
         rm -f /opt/docker/.firstrun
         echo "Setting permissions..."
